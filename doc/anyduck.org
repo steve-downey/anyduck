@@ -104,7 +104,7 @@ void test(AnyDuck a) {
 results in something like
 
 #+begin_src asm
-0000000000000050 <test(scratch::AnyDuck)>:
+0000000000000050 <test(anyduck::AnyDuck)>:
   50:   48 8b 47 10             mov    0x10(%rdi),%rax
   54:   be 01 00 00 00          mov    $0x1,%esi
   59:   ff e0                   jmpq   *%rax
@@ -116,7 +116,7 @@ and the ~any_cast<>~ from the address of the passed in std::any is noexcept, but
 
 For the case where the ~quack~ is known, codegen is something like
 #+begin_src asm
-scratch::AnyDuck::AnyDuck<Duck&>(Duck&)::{lambda(std::any const&, int)#1}::__invoke(std::any const&, int): # @scratch::AnyDuck::AnyDuck<Duck&>(Duck&)::{lambda(std::any const&, int)#1}::__invoke(std::any const&, int)
+anyduck::AnyDuck::AnyDuck<Duck&>(Duck&)::{lambda(std::any const&, int)#1}::__invoke(std::any const&, int): # @anyduck::AnyDuck::AnyDuck<Duck&>(Duck&)::{lambda(std::any const&, int)#1}::__invoke(std::any const&, int)
         movl    %esi, %edi
         jmp     bell(int)                # TAILCALL
 #+end_src
@@ -124,7 +124,7 @@ scratch::AnyDuck::AnyDuck<Duck&>(Duck&)::{lambda(std::any const&, int)#1}::__inv
 If the implementation of the underlying quack is not available there's a little more work
 
 #+begin_src asm
-scratch::AnyDuck::AnyDuck<Mallard&>(Mallard&)::{lambda(std::any const&, int)#1}::__invoke(std::any const&, int): # @scratch::AnyDuck::AnyDuck<Mallard&>(Mallard&)::{lambda(std::any const&, int)#1}::__invoke(std::any const&, int)
+anyduck::AnyDuck::AnyDuck<Mallard&>(Mallard&)::{lambda(std::any const&, int)#1}::__invoke(std::any const&, int): # @anyduck::AnyDuck::AnyDuck<Mallard&>(Mallard&)::{lambda(std::any const&, int)#1}::__invoke(std::any const&, int)
         movl    $_ZNSt3any17_Manager_internalI7MallardE9_S_manageENS_3_OpEPKS_PNS_4_ArgE, %ecx
         xorl    %eax, %eax
         cmpq    %rcx, (%rdi)
@@ -139,4 +139,4 @@ But far less than I would have expected. ~std::any~ is less awful than I thought
 You can take a look at the code so far here
 [[https://godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAKxAEZSAbAQwDtRkBSAJgCFufSAZ1QBXYskwgA5NwDMeFsgYisAag6yAwqwCeG7BwAMAQTkKlKzOq0EdAB0wB9AsSaFB%252Bo6ZMsmAW0xBOyYJVUFkVwJkBHUAdj4TLyUmQUFVYxYdABERZABrOITjVRKwgnQQEF1VdFy8xw0i0tURQQVgVQBHERC8gDMWayzVADdUPHRVCAAqAEoIQXLK6rQWRe4ANlJVBQJZxq9m7t6Brp78htkiw9U7EQAjBjxkEBuSjOy6iA%252Bc/NVV9ZcDazIY1TB9JgiBgEA4mZo/L4I/KbEEaYZYCFQmFXN7pTK/PIQVGydHgyHQ2HeYqlAiYPx2Zi06yaWwOXwBVQEzxw0pIwlcoGbGp1fY85olEDCi4LJYgPokADuTGI6A0mi5smwEFq%252BVms1IuPFZ16jggHAArHxzVkZRUqpl/qg1jCgTVtrsdqj4oajaViJgCGJBos7bpHMgUtjNCHKv6/KgRk5/X1MP7FE4oxqDJqzUD0LMALT6Y75M1i30VvD7HHlo0cWJZL18BteXFjCbG0sehiYNgEBAggEEQqqf2B4iDEv1CD9vCCIuanX1bY9vsDxpxLKtls1qn14YAegPqnZgWCoXCkWirZMmAAHrSJ6NxpN7pgGAwIB6q5SksxUpydSFDcdyPM8rzlu2kxTl%252BLDDquwD9oOTqLIUY5Bqob4fhACFIQcLaJDu1wmMkAEALJMB%252ByqTPWTS3A8TwvG2L6doS3a9ohA6Os6v5ETexhHs%252BHYUVRKqVDB7FrshzrASYgnNDGKCiMOapquoXBcCJzBiepXDMmpuExKpWiqGAMjmpoLBmZSgn7vxUGqLSiwQFp1FCn4lHafmsnUiUl5MFESAgHyqhMBAHmifmlLNEwAB0MG0NW1wEVSDlOQQCwRAF0SVCFQ5CkwTa4nFCVJduW6JJVxgeh5CiwcOB7TMqwDINMB7bNEyrTNMqiNc1IxtaKpjeuWrTtCe/hniEVj%252BYF0WlASNTzX5WWBbl%252BJAWFUW7jF8XnISiW/uWglDoBfzIKqO2lIJs05cFG3nWFF1lcdx4RntvQQIdu64jdq13SF/guZ5bneg2L2%252Bb1x7%252BB9pZcBDv3HulwORbR%252B4Q80gnI4VR2Q4t6BcMtNRcLDhLw7xFXGFI%252BoMNI5pSKQLDSIYDOoNImj8PwYSiOIVhyLQDMEMz1P6nkICyAALLFsS0BssRy4YEu0AAnAAHLIhixIw0gSwzTNSCzpBs1IDOCCAhikELBvU6QcCwEgaD0ngPZkBQECO3YzupigzBsKrhgW30zuPmbED3MLpD3Aoyo6NIAukI7ARwQA8iwDCx9bpBYB5bA9hH%252BD%252BsgBB4ImZuZ/emDICItJxwzuzvrXjB4PcrjEDomgYJImcuHgfi1zTrDsJzvBN/cZuwKeKB%252BMgiwMFwpCJsQIAuCILB5HqRt2MXKHSAWyeyKoBYhminC8PwXBMKops8xIdA03TesR8bd6qxsBYbBL/y%252Bx0quxYYf9TFwIQEg6lZD0FUB3J2LtQGJQgcPHggthYbzFmA2KysJZq2VsrDYXAJYbHVlsWmUhdaMyftIU25tLZINtjARAIBlJ3AIOQSgHsvZL3oJgfARB2GkAVK4Ow/dtZSHpqQzOxt%252BaqAVIQGIL834fy/oPVQv9/6GytizZB4tZCxVkDo3Rei9FCJIfrQ2xsKEWzUSLIRXAGZ91oAHURJjyFUOthvRebQnQgAlkAA][Compiler Explorer Link to see the results]]
 
-I'll clean up my scratch project and push it at some point.
+I'll clean up my anyduck project and push it at some point.

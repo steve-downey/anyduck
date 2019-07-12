@@ -1,4 +1,4 @@
-#include <scratch/scratch.h>
+#include <anyduck/anyduck.h>
 
 #include <iostream>
 
@@ -12,32 +12,32 @@ class Mallard {
     void quack(int length) const;
 };
 
-// void Mallard::quack(int length) const {
-//     std::cout << "Mallard: " << length << '\n';
-// }
+void Mallard::quack(int length) const {
+    std::cout << "Mallard: " << length << '\n';
+}
 
 void test(Mallard& mallard) {
-    scratch::AnyDuck a(mallard);
+    anyduck::AnyDuck a(mallard);
     a.quack(1);
 }
 
-void test(scratch::AnyDuck const& a) {
+void test(anyduck::AnyDuck const& a) {
     a.quack(1);
 }
 
 
 int main(int /*argc*/, char** /*argv*/)
 {
-    using namespace scratch;
+    using namespace anyduck;
     Duck d;
-    scratch::AnyDuck a(d);
+    anyduck::AnyDuck a(d);
     a.quack(1);
 
     // const Duck cd;
-    // scratch::AnyDuck ca(cd);
+    // anyduck::AnyDuck ca(cd);
     // ca.quack(1);
 
-    // scratch::AnyDuck am(Mallard{});
+    // anyduck::AnyDuck am(Mallard{});
     // am.quack(2);
 
     // test(Mallard{});

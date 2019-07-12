@@ -1,19 +1,19 @@
-add_library(scratch STATIC "")
+add_library(anyduck STATIC "")
 
 target_sources(
-  scratch
+  anyduck
   PRIVATE
-  scratch.cpp)
+  anyduck.cpp)
 
 include(GNUInstallDirs)
 
-target_include_directories(scratch PUBLIC
+target_include_directories(anyduck PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../>
-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${CMAKE_LOWER_PROJECT_NAME}>  # <prefix>/include/scratch
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${CMAKE_LOWER_PROJECT_NAME}>  # <prefix>/include/anyduck
   )
 
 install(
-  TARGETS scratch
+  TARGETS anyduck
   EXPORT ${TARGETS_EXPORT_NAME}
   DESTINATION ${CMAKE_INSTALL_LIBDIR}
   )
@@ -28,16 +28,16 @@ install(
 
 
 ## Tests
-add_executable(scratch_test "")
+add_executable(anyduck_test "")
 
 target_sources(
-  scratch_test
+  anyduck_test
   PRIVATE
-  scratch.t.cpp)
+  anyduck.t.cpp)
 
-target_link_libraries(scratch_test scratch)
-target_link_libraries(scratch_test gtest)
-target_link_libraries(scratch_test gtest_main)
+target_link_libraries(anyduck_test anyduck)
+target_link_libraries(anyduck_test gtest)
+target_link_libraries(anyduck_test gtest_main)
 
 include(GoogleTest)
-gtest_discover_tests(scratch_test)
+gtest_discover_tests(anyduck_test)

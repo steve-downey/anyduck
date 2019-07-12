@@ -1,6 +1,6 @@
-// scratch.h                                                       -*-C++-*-
-#ifndef INCLUDED_SCRATCH
-#define INCLUDED_SCRATCH
+// anyduck.h                                                       -*-C++-*-
+#ifndef INCLUDED_ANYDUCK
+#define INCLUDED_ANYDUCK
 
 #include <memory>
 #include <variant>
@@ -8,7 +8,7 @@
 #include <any>
 #include <type_traits>
 
-namespace scratch {
+namespace anyduck {
 
 class AnyDuck {
     std::any duck_;
@@ -31,6 +31,6 @@ class AnyDuck {
     void quack(int length) const { return quack_(this->duck_, length); }
 };
 
-} // namespace scratch
+} // namespace anyduck
 
 #endif

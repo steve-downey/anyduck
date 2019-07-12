@@ -1,2 +1,2 @@
-add_subdirectory(scratch)
+add_subdirectory(anyduck)
 add_subdirectory(examples)

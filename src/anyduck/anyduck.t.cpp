@@ -1,10 +1,10 @@
-#include <scratch/scratch.h>
+#include <anyduck/anyduck.h>
 
 #include <gtest/gtest.h>
 
-using namespace scratch;
+using namespace anyduck;
 
-TEST(ScratchTest, TestGTest) {
+TEST(AnyduckTest, TestGTest) {
     ASSERT_EQ(1, 1);
 }
 
@@ -30,7 +30,7 @@ void test(AnyDuck a) {
     a.quack(1);
 }
 
-TEST(ScratchTest, Breathing) {
+TEST(AnyduckTest, Breathing) {
     Duck d;
     AnyDuck a(d);
     a.quack(1);
