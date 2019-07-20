@@ -4,25 +4,29 @@
 
 class Duck {
   public:
-    void quack(int length) const {std::cout << "Duck: " << length << '\n';}
+    int quack(int length) const {
+        std::cout << "Duck: " << length << '\n';
+        return length;
+    }
 };
 
 class Mallard {
   public:
-    void quack(int length) const;
+    int quack(int length) const;
 };
 
-void Mallard::quack(int length) const {
-    std::cout << "Mallard: " << length << '\n';
+int Mallard::quack(int length) const {
+    std::cout << "Mallard: " << 2 * length << '\n';
+    return length * 2;
 }
 
-void test(Mallard& mallard) {
+int test(Mallard& mallard) {
     anyduck::AnyDuck a(mallard);
-    a.quack(1);
+    return a.quack(1);
 }
 
-void test(anyduck::AnyDuck const& a) {
-    a.quack(1);
+int test(anyduck::AnyDuck const& a) {
+    return a.quack(1);
 }
 
 

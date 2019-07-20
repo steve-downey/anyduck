@@ -34,7 +34,8 @@ target_sources(
   anyduck_test
   PRIVATE
   anyduck_test.m.cpp
-  anyduck.t.cpp)
+  anyduck.t.cpp
+  anyduck_hiddenduck.cpp)
 
 target_link_libraries(anyduck_test anyduck)
 target_link_libraries(anyduck_test Catch2)

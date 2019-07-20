@@ -12,12 +12,12 @@ namespace anyduck {
 
 class AnyDuck {
     std::any duck_;
-    using quackfn = void (*)(std::any const&, int);
+    using quackfn = int (*)(std::any const&, int);
     quackfn quack_;
 
   public:
     AnyDuck(AnyDuck const&) = default;
-    AnyDuck(AnyDuck&) = default;
+    AnyDuck(AnyDuck&) = default; // Make sure not to catch & in template
     AnyDuck() = default;
 
     template <typename Duck>
@@ -28,7 +28,7 @@ class AnyDuck {
                   i);
           }) {}
 
-    void quack(int length) const { return quack_(this->duck_, length); }
+    int quack(int length) const { return quack_(this->duck_, length); }
 };
 
 } // namespace anyduck
