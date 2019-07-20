@@ -1,11 +1,15 @@
 #include <anyduck/anyduck.h>
 
-#include <gtest/gtest.h>
+#include <catch2/catch.hpp>
+#include <iostream>
 
 using namespace anyduck;
 
-TEST(AnyduckTest, TestGTest) {
-    ASSERT_EQ(1, 1);
+
+TEST_CASE("TestCatch2") {
+    SECTION("Test Catch2") {
+        REQUIRE(true);
+    }
 }
 
 class Duck {
@@ -30,18 +34,20 @@ void test(AnyDuck a) {
     a.quack(1);
 }
 
-TEST(AnyduckTest, Breathing) {
-    Duck d;
-    AnyDuck a(d);
-    a.quack(1);
+TEST_CASE("AnyduckTest") {
+    SECTION("Breathing") {
+        Duck d;
+        AnyDuck a(d);
+        a.quack(1);
 
-    const Duck cd;
-    AnyDuck ca(cd);
-    ca.quack(1);
+        const Duck cd;
+        AnyDuck ca(cd);
+        ca.quack(1);
 
-    AnyDuck am(Mallard{});
-    am.quack(2);
+        AnyDuck am(Mallard{});
+        am.quack(2);
 
-    test(Mallard{});
-    test(a);
+        test(Mallard{});
+        test(a);
+    }
 }

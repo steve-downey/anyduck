@@ -1,1 +1,1 @@
-add_subdirectory(googletest EXCLUDE_FROM_ALL)
+add_subdirectory(Catch2 EXCLUDE_FROM_ALL)

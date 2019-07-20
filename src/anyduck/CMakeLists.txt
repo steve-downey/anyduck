@@ -33,11 +33,15 @@ add_executable(anyduck_test "")
 target_sources(
   anyduck_test
   PRIVATE
+  anyduck_test.m.cpp
   anyduck.t.cpp)
 
 target_link_libraries(anyduck_test anyduck)
-target_link_libraries(anyduck_test gtest)
-target_link_libraries(anyduck_test gtest_main)
+target_link_libraries(anyduck_test Catch2)
 
-include(GoogleTest)
-gtest_discover_tests(anyduck_test)
+
+find_package(Catch2 REQUIRED)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Catch2_SOURCE_DIR}/contrib)
+include(CTest)
+include(Catch)
+catch_discover_tests(anyduck_test)
