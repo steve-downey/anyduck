@@ -46,3 +46,15 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Catch2_SOURCE_DIR}/contrib)
 include(CTest)
 include(Catch)
 catch_discover_tests(iduck_test)
+
+## Benchmarks
+add_executable(iduck_benchmark "")
+target_sources(
+  iduck_benchmark
+  PRIVATE
+  iduck.b.cpp
+  iduck_hiddenduck.cpp
+  )
+target_link_libraries(iduck_benchmark iduck)
+target_link_libraries(iduck_benchmark benchmark)
+add_test(benchmark iduck_benchmark --benchmark_min_time=0.01)

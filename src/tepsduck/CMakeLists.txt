@@ -46,3 +46,15 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Catch2_SOURCE_DIR}/contrib)
 include(CTest)
 include(Catch)
 catch_discover_tests(tepsduck_test)
+
+## Benchmarks
+add_executable(tepsduck_benchmark "")
+target_sources(
+  tepsduck_benchmark
+  PRIVATE
+  tepsduck.b.cpp
+  tepsduck_hiddenduck.cpp
+  )
+target_link_libraries(tepsduck_benchmark tepsduck)
+target_link_libraries(tepsduck_benchmark benchmark)
+add_test(benchmark tepsduck_benchmark --benchmark_min_time=0.01)

@@ -46,3 +46,15 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Catch2_SOURCE_DIR}/contrib)
 include(CTest)
 include(Catch)
 catch_discover_tests(anyduck_test)
+
+## Benchmarks
+add_executable(anyduck_benchmark "")
+target_sources(
+  anyduck_benchmark
+  PRIVATE
+  anyduck.b.cpp
+  anyduck_hiddenduck.cpp
+  )
+target_link_libraries(anyduck_benchmark anyduck)
+target_link_libraries(anyduck_benchmark benchmark)
+add_test(benchmark anyduck_benchmark --benchmark_min_time=0.01)
