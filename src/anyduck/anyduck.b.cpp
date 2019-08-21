@@ -65,3 +65,47 @@ static void Benchmark_Construct_HiddenAnyDuck_Temp(benchmark::State& state) {
     }
 }
 BENCHMARK(Benchmark_Construct_HiddenAnyDuck_Temp);
+
+
+static void Benchmark_Construct_AnyDuckVtbl(benchmark::State& state) {
+    Duck d;
+    for (auto _ : state) {
+        AnyDuckVtbl a(d);
+        benchmark::DoNotOptimize(a.quack(1));
+    }
+}
+BENCHMARK(Benchmark_Construct_AnyDuckVtbl);
+
+static void Benchmark_Construct_AnyDuckVtbl_LValue(benchmark::State& state) {
+    for (auto _ : state) {
+        Duck d;
+        AnyDuckVtbl a(d);
+        benchmark::DoNotOptimize(a.quack(1));
+    }
+}
+BENCHMARK(Benchmark_Construct_AnyDuckVtbl_LValue);
+
+static void Benchmark_Construct_AnyDuckVtbl_Temp(benchmark::State& state) {
+    for (auto _ : state) {
+        AnyDuckVtbl am(Mallard{});
+        benchmark::DoNotOptimize(am.quack(2));
+    }
+}
+BENCHMARK(Benchmark_Construct_AnyDuckVtbl_Temp);
+
+static void Benchmark_Construct_HiddenAnyDuckVtbl_LValue(benchmark::State& state) {
+    for (auto _ : state) {
+        HiddenMallard d;
+        AnyDuckVtbl a(d);
+        benchmark::DoNotOptimize(a.quack(2));
+    }
+}
+BENCHMARK(Benchmark_Construct_HiddenAnyDuckVtbl_LValue);
+
+static void Benchmark_Construct_HiddenAnyDuckVtbl_Temp(benchmark::State& state) {
+    for (auto _ : state) {
+        AnyDuckVtbl am(HiddenMallard{});
+        benchmark::DoNotOptimize(am.quack(2));
+    }
+}
+BENCHMARK(Benchmark_Construct_HiddenAnyDuckVtbl_Temp);
