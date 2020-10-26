@@ -38,11 +38,11 @@ target_sources(
   anyduck_hiddenduck.cpp)
 
 target_link_libraries(anyduck_test anyduck)
-target_link_libraries(anyduck_test Catch2)
+target_link_libraries(anyduck_test Catch2WithMain)
 
 
-find_package(Catch2 REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Catch2_SOURCE_DIR}/contrib)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Catch2_SOURCE_DIR}/extras)
+#find_package(Catch2 REQUIRED)
 include(CTest)
 include(Catch)
 catch_discover_tests(anyduck_test)

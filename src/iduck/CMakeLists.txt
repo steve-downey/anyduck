@@ -38,11 +38,11 @@ target_sources(
   iduck_hiddenduck.cpp)
 
 target_link_libraries(iduck_test iduck)
-target_link_libraries(iduck_test Catch2)
+target_link_libraries(iduck_test Catch2WithMain)
 
 
-find_package(Catch2 REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Catch2_SOURCE_DIR}/contrib)
+#find_package(Catch2 REQUIRED)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Catch2_SOURCE_DIR}/extras)
 include(CTest)
 include(Catch)
 catch_discover_tests(iduck_test)

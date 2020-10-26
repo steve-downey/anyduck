@@ -38,11 +38,11 @@ target_sources(
   tepsduck_hiddenduck.cpp)
 
 target_link_libraries(tepsduck_test tepsduck)
-target_link_libraries(tepsduck_test Catch2)
+target_link_libraries(tepsduck_test Catch2WithMain)
 
 
-find_package(Catch2 REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Catch2_SOURCE_DIR}/contrib)
+#find_package(Catch2 REQUIRED)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Catch2_SOURCE_DIR}/extras)
 include(CTest)
 include(Catch)
 catch_discover_tests(tepsduck_test)

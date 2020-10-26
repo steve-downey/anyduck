@@ -25,6 +25,7 @@ define run_cmake =
 	-G "Unix Makefiles" \
 	-DCMAKE_BUILD_TYPE=$(BUILD_TYPE) \
 	-DCMAKE_INSTALL_PREFIX=$(abspath $(INSTALL_PREFIX)) \
+	-DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
 	$(CMAKE_ARGS) \
 	$(CURDIR)
 endef
